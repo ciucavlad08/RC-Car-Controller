@@ -16,9 +16,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
         supportActionBar?.hide()
-
 
         val fwBtn = findViewById<ImageButton>(R.id.fwBtn)
         val bkBtn = findViewById<ImageButton>(R.id.bkBtn)
@@ -27,7 +25,6 @@ class MainActivity : AppCompatActivity() {
         val sldSet = findViewById<com.google.android.material.slider.Slider>(R.id.valSetter)
         val liveSpeed = findViewById<TextView>(R.id.liveSpeed)
         var speed : Int = 20
-        var direction: String
 
         fun run(url: String) {
             val request = Request.Builder()
@@ -39,10 +36,6 @@ class MainActivity : AppCompatActivity() {
             })
         }
 
-        /*sldSet.addOnChangeListener { slider, value, fromUser ->
-            val values = sldSet.value
-            liveSpeed.text = "${values}"*/
-
             sldSet.addOnChangeListener { slider, value, fromUser ->
                 speed = value.toInt()
                 liveSpeed.text = speed.toString()
@@ -51,18 +44,11 @@ class MainActivity : AppCompatActivity() {
 
             fwBtn.setOnTouchListener { v, event ->
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    //Toast.makeText(this@MainActivity, "I pressed up", Toast.LENGTH_SHORT).show()
-                    direction = "front"
-                    println(direction)
-                    //println(values)
                     println("varianta a doua" +speed)
-                    run("http://192.168.4.1:5000/f?speed="+speed)
+                    run("http://192.168.4.1:5000/l?speed="+speed)
                     true
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
-                    //Toast.makeText(this@MainActivity, "I depressed up", Toast.LENGTH_SHORT).show()
                     run("http://192.168.4.1:5000/s")
-                    direction = "stop"
-                    println(direction)
                     true
                 }
                 false
@@ -70,52 +56,33 @@ class MainActivity : AppCompatActivity() {
 
             bkBtn.setOnTouchListener { v, event ->
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    //Toast.makeText(this@MainActivity, "I pressed up", Toast.LENGTH_SHORT).show()
-                    direction = "back"
-                    println(direction)
-                    //println(values)
-                    println("varianta a doua "+speed)
-                    run("http://192.168.4.1:5000/b?speed="+speed)
+                    run("http://192.168.4.1:5000/r?speed="+speed)
                     true
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
-                    //Toast.makeText(this@MainActivity, "I depressed up", Toast.LENGTH_SHORT).show()
-                    direction = "stop"
-                    println(direction)
                     run("http://192.168.4.1:5000/s")
+                    true
                 }
                 false
             }
 
             rgBtn.setOnTouchListener { v, event ->
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    //Toast.makeText(this@MainActivity, "I pressed up", Toast.LENGTH_SHORT).show()
-                    direction = "right"
-                    println(direction)
-                    //println(values)
-                    run("http://192.168.4.1:5000/r?speed="+speed)
-                    println("varianta a doua" +speed)
+                    run("http://192.168.4.1:5000/f?speed="+speed)
+                    true
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
-                    //Toast.makeText(this@MainActivity, "I depressed up", Toast.LENGTH_SHORT).show()
-                    direction = "stop"
-                    println(direction)
                     run("http://192.168.4.1:5000/s")
+                    true
                 }
                 false
             }
 
             lfBtn.setOnTouchListener { v, event ->
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    //Toast.makeText(this@MainActivity, "I pressed up", Toast.LENGTH_SHORT).show()
-                    direction = "left"
-                    println(direction)
-                    //println(values)
-                    run("http://192.168.4.1:5000/l?speed="+speed)
-                    println("varianta a doua" +speed)
+                    run("http://192.168.4.1:5000/b?speed="+speed)
+                    true
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
-                    //Toast.makeText(this@MainActivity, "I depressed up", Toast.LENGTH_SHORT).show()
-                    direction = "stop"
-                    println(direction)
                     run("http://192.168.4.1:5000/s")
+                    true
                 }
                 false
             }
